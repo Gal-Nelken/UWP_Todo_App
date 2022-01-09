@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using UWP_Todo_App.ViewModels;
 
 namespace UWP_Todo_App.Models
 {
@@ -61,7 +62,6 @@ namespace UWP_Todo_App.Models
             {
                 connection.CreateTable<TodoItem>();
                 connection.Insert(todoItem);
-
             }
         }
 

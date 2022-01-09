@@ -35,7 +35,6 @@ namespace UWP_Todo_App
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
             AddTodoModal.Visibility = Visibility.Collapsed ;
-
         }
     }
 }

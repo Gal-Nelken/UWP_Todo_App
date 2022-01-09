@@ -38,8 +38,8 @@
 
         <ListView Grid.Row="1" Grid.RowSpan="2"
                   Background="#33364f"
-                  ItemsSource="{Binding Items}"
-                  SelectedItem="{Binding SelectedItem}">
+                  ItemsSource="{Binding Items, Mode=OneTime}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Padding="5"
@@ -54,6 +54,7 @@
                         <CheckBox Margin="10,0,15,0"
                             IsChecked="{Binding IsDone, Mode=TwoWay}"/>
                         
+                            
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="{Binding Title, Mode=OneTime}"
                                        Foreground="{Binding IsDone, Converter={StaticResource boolToColor}, ConverterParameter=title}"

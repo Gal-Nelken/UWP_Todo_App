@@ -41,8 +41,15 @@ namespace UWP_Todo_App.ViewModels
         {
             if (selectedItem != null)
             {
+                TodoItem itemToRemove = new TodoItem
+                {
+                    Title = selectedItem.Title,
+                    Description = selectedItem.Description,
+                    ID = selectedItem.ID,
+                    IsDone = selectedItem.IsDone
+                };
                 TodoRepository repository = new TodoRepository();
-                repository.Delete(SelectedItem);
+                repository.Delete(itemToRemove);
                Items.Remove(SelectedItem);
             }
         }
@@ -51,6 +58,7 @@ namespace UWP_Todo_App.ViewModels
         public void AddItem()
         {
             // TODO: OPEN A NEW WINDOW TO CREATE A NEW TODO
+            
         }
 
 
