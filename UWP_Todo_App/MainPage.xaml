@@ -16,17 +16,17 @@
         <convertors:BoolToVisibilityConvertor x:Key="boolToVisibility" />
     </Page.Resources>
     
-    <Grid Background="{StaticResource clr3}" Margin="5">
+    <Grid Background="{StaticResource clr3}" Margin="1" x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="*" x:Name="MiddleRow" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
       
             <TextBlock Text="Todo Items"
                        Style="{StaticResource MainTitle}"/>
 
-       <!--#region TODOS CONTAINER-->
+        <!--#region TODOS CONTAINER-->
 
         <ListView Grid.Row="1" Grid.RowSpan="2"
                   Background="{StaticResource clr4}"
@@ -50,6 +50,7 @@
                             <TextBlock Style="{StaticResource paragraph}"
                                     Text="asdlkfjas dlkfasmd lfkmasdlkfds msfdlmnfsld kgmnsfdlkgm asrdlm gasld;k mg;laskdmg ;laskm;las mgd;l"/>
                         </StackPanel>
+
                     </StackPanel>
                 </Border>
             </ListViewItem>
@@ -67,20 +68,20 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top">
                         
-                        <CheckBox IsChecked="{x:Bind IsDone, Mode=TwoWay}"/>
+                        <!-- TODO: Fix bug on saving or deleting todo, IsChecked return to false-->
+                        <CheckBox IsChecked="{x:Bind IsDone, Mode=TwoWay}"
+                                  Click="{x:Bind Update}"/>
                         
-                        
-                        <!-- TODO: Find why converter isn't working
-                                    Foreground="{x:Bind IsDone, Converter={StatiResource boolToColor}, ConverterParameter=title}"
-                                       Foreground="{x:Bind IsDone, Converter={SctaticResource boolToColor}}"
-                        -->
+                    
                             
                         <StackPanel Orientation="Vertical">
-                                <TextBlock Style="{StaticResource SubTitle}">
+                                <TextBlock Style="{StaticResource SubTitle}"
+                                    Foreground="{x:Bind IsDone, Mode=OneWay, Converter={StaticResource boolToColor}, ConverterParameter=title}">
                                     <Run Text="{x:Bind ID, Mode=OneTime}"/>. <Run Text="{x:Bind Title, Mode=OneTime}"/>
                                 </TextBlock> 
                                        
                                 <TextBlock Style="{StaticResource paragraph}"
+                                    Foreground="{x:Bind IsDone, Mode=OneWay, Converter={StaticResource boolToColor}}"
                                     Text="{x:Bind Description, Mode=OneTime}"/>
                         </StackPanel>
                         
@@ -100,29 +101,18 @@
             HorizontalAlignment="Right"
             Grid.Row="2" 
             Margin="0 0 25 15">
-            <!-- TODO: Design Buttons-->
             <Button x:Name="removeTodosBtn" 
                     Content="🗑" 
 					Style="{StaticResource DangerBtn}"
                     Click="{x:Bind listVM.DeleteItem}"
                     ToolTipService.ToolTip="Remove selected todo"/>
-                    <!--
-            -->
+         
             <Button x:Name="addTodoBtn" 
 					Style="{StaticResource ApproveBtn}"
                     Content="➕"
                     Click="addTodoBtn_Click"
                     ToolTipService.ToolTip="Add new todo"/>
         </StackPanel>
-        <!--#endregion-->
-        
-        <!--#region Add Todo Modal-->
-        <view:AddNewTodo 
-            x:Name="AddTodoModal"
-            Visibility="Collapsed" 
-            VerticalAlignment="Center" 
-            HorizontalAlignment="Center" 
-            Grid.Row="1"/>
         <!--#endregion-->
 
     </Grid>

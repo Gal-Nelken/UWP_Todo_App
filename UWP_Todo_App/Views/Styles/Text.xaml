@@ -3,21 +3,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-    <!-- TEXT BOX -->
+    <!-- TEXBOX -->
     <Style TargetType="TextBox">
         <Setter Property="Width" Value="250" />
-        <Setter Property="Margin" Value="10, 0, 0, 10" />
+        <Setter Property="Margin" Value="5,10" />
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left" />
     </Style>
 
     <!-- MAIN TITLE -->
-    <Style TargetType="TextBlock" x:Name="PageTitle">
-        <Setter Property="FontSize" Value="30" />
+    <Style TargetType="TextBlock" x:Key="MainTitle">
         <Setter Property="Foreground" Value="{StaticResource clr2}" />
-        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="30" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="Margin" Value="20,20,0,20" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Margin" Value="10,0,0,10" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
 
     <!-- SUB TITLE -->
@@ -32,10 +34,10 @@
         <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
 
-    <!--PARAGRAPH-->
+    <!-- PARAGRAPH -->
     <Style TargetType="TextBlock" x:Key="paragraph">
         <Setter Property="Foreground" Value="{StaticResource clr6}" />
-        <Setter Property="MaxWidth" Value="500" />
+        <Setter Property="MaxWidth" Value="600" />
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 

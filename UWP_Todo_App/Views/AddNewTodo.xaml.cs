@@ -18,26 +18,42 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UWP_Todo_App.Views
 {
-    public partial class AddNewTodo : UserControl
+    public sealed partial class AddNewTodo : UserControl
     {
-        public TodoListViewModel listVM { private get; set; }
-        
+        #region Fields
+        // ITEM VIEW-MODAL
+        private TodoItemViewModel itemVM { get; set; }
+
+        // PARENT ELEMENT FOR CLOSING MODAL
+        public Grid ParentControl;
+
+        #endregion
+
+
+        #region Constructor
         public AddNewTodo()
         {
             this.InitializeComponent();
-            
+            itemVM = new TodoItemViewModel(Models.TodoRepository.Instance);
         }
+        #endregion
 
+        #region Methods
+
+        // CLOSE MODAL
         private void CloseModalBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            ParentControl.Children.Remove(this);            
         }
 
+        // SAVE ITEM
         private void submitBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(listVM.NewTodo.Title) || string.IsNullOrWhiteSpace(listVM.NewTodo.Description)) return;
-            listVM.AddItem();
-            this.Visibility = Visibility.Collapsed;
+            if (string.IsNullOrWhiteSpace(itemVM.Title) || string.IsNullOrWhiteSpace(itemVM.Description)) return;
+            itemVM.Save();
+            ParentControl.Children.Remove(this);
         }
+
+        #endregion
     }
 }

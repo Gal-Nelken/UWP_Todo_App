@@ -1,15 +1,21 @@
 ﻿using System.Collections.Generic;
-
+using System.Linq;
 
 namespace UWP_Todo_App.Models
 {
+    public delegate void RepositoryChanged(TodoRepository repository);
     public class TodoRepository
     {
 
         #region Singleton
+        // Repository Instance
         private static TodoRepository _instance;
         public static TodoRepository Instance => _instance ?? (_instance = new TodoRepository());
 
+        // Repository Update Event
+        public event RepositoryChanged UpdateRepository;
+
+        // Constructor
         private TodoRepository()
         {
             _todoItems = new List<TodoItem>();
@@ -34,28 +40,50 @@ namespace UWP_Todo_App.Models
         #endregion
 
         #region Methods
+        // Create
         public void Add(TodoItem todoItem)
         {
             _todoItems.Add(todoItem);
             reindexItems();
+            UpdateRepository(Instance);
         }
-
-        public void Delete(TodoItem todoItem)
+        
+        // Read
+        public List<TodoItem> GetAll()
         {
-            _todoItems.RemoveAt(todoItem.ID - 1);
-            reindexItems();
+            return _todoItems;
         }
-
         public TodoItem Get(int id)
         {
             return _todoItems[id];
         }
 
-        public List<TodoItem> GetAll()
+        // Update
+        public void Update(TodoItem todoItem)
         {
-            return _todoItems;
+            var todo = _todoItems.FirstOrDefault(item => item.ID == todoItem.ID);
+            if (todo != null)
+            {
+                todo.Title = todoItem.Title;
+                todo.Description = todoItem.Description;
+                todo.IsDone = todoItem.IsDone;
+            }
+            UpdateRepository(Instance);
         }
 
+        // Delete
+        public void Delete(int id)
+        {
+            var todo = _todoItems.FirstOrDefault(item => item.ID == id);
+            if (todo != null)
+            {
+            _todoItems.Remove(todo);
+            reindexItems();
+            }
+            UpdateRepository(Instance);
+        }
+
+        // Set Items Index
         private void reindexItems()
         {
             for (int i = 0; i < _todoItems.Count; i++)

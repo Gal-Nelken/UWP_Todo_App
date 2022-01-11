@@ -10,11 +10,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/Styles/Colors.xaml" />
-                
-                <!-- TODO: Check why resource dictionary doesn't work
-                <ResourceDictionary Source="Views/Styles/Text.xaml" />
-                <ResourceDictionary Source="Views/Styles/CheckBox.xaml" />
-                -->
+               
                 
                 <!--#region TEXT DICTIONARY-->
                 <ResourceDictionary>
@@ -256,8 +252,8 @@
 
                 </ResourceDictionary>
                 <!--#endregion-->
-                
-                <!--#region BUTTONS DICTIONARY-->
+
+                <!--#region  BUTTONS DICTIONARY -->
                 <ResourceDictionary>
 
                     <!-- ADD/APPROVE BUTTON -->

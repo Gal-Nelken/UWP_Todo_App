@@ -32,45 +32,49 @@
 
             <TextBlock Text="Add New Todo" 
 				        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                       HorizontalAlignment="Center" FontSize="25" TextDecorations="Underline"
+                       HorizontalAlignment="Center" FontSize="25" 
                         Style="{StaticResource MainTitle}"/>
 
+            <!--#region Title -->
             <TextBlock Text="Title:"
 				        Grid.Column="0" Grid.Row="1" 
                         Style="{StaticResource SubTitle}"/>
 
-            <TextBox Text="{x:Bind listVM.NewTodo.Title, Mode=TwoWay}"
+            <TextBox Text="{x:Bind itemVM.Title, Mode=TwoWay}"
                      Grid.Column="1" Grid.Row="1"/>
+             <!--#endregion-->
 
-
-
+            <!--#region Description -->
             <TextBlock Text="Description:"
 				       Grid.Column="0" Grid.Row="2"
                        Style="{StaticResource SubTitle}"/>
 
-            <TextBox Text="{x:Bind listVM.NewTodo.Description, Mode=TwoWay}"
+            <TextBox Text="{x:Bind itemVM.Description, Mode=TwoWay}"
 				     Grid.Column="1" Grid.Row="2"/>
-
+            <!--#endregion-->
+            
+            <!--#region Buttons Container -->
             <StackPanel
                 Orientation="Horizontal"
                 Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
                 HorizontalAlignment="Center">
 
-                <Button Content="X"
-                        x:Name="CloseModalBtn"
-                        Style="{StaticResource DangerBtn}"
-                        Margin="0,0,50,0"
-                        Click="CloseModalBtn_Click"
-                            ToolTipService.ToolTip="Cancel"/>
-
                 <Button x:Name="submitBtn" 
                         Style="{StaticResource ApproveBtn}"
+                        Margin="0,0,50,0"
                         Click="submitBtn_Click"
                         Content="➕" 
                         ToolTipService.ToolTip="Add todo"/>
 
-
+                <Button Content="X"
+                        x:Name="CloseModalBtn"
+                        Style="{StaticResource DangerBtn}"
+                        Click="CloseModalBtn_Click"
+                            ToolTipService.ToolTip="Cancel"/>
+        
             </StackPanel>
+            <!--#endregion-->
+            
         </Grid>
     </Border>
 </UserControl>

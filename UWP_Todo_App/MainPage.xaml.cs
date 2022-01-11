@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UWP_Todo_App.ViewModels;
+using UWP_Todo_App.Views;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -30,15 +31,19 @@ namespace UWP_Todo_App
         {
             this.InitializeComponent();
             listVM = new TodoListViewModel(Models.TodoRepository.Instance);
-
-
-            listVM.NewTodo = new TodoItemViewModel();
-            AddTodoModal.listVM = listVM;
         }
 
         private void addTodoBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddTodoModal.Visibility = Visibility.Visible;
+            var newTodoModal = new AddNewTodo()
+            {
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+            
+            MainGrid.Children.Add(newTodoModal);
+            Grid.SetRow(newTodoModal, 1);
+            newTodoModal.ParentControl = MainGrid;
         }
     }
 }

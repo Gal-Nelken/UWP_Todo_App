@@ -5,7 +5,6 @@ namespace UWP_Todo_App.ViewModels
 {
     public class TodoListViewModel
     {
-
         #region Fields
         // TODO ITEMS COLLECTION
         public ObservableCollection<TodoItemViewModel> Items { get; set; }
@@ -27,7 +26,7 @@ namespace UWP_Todo_App.ViewModels
             set { selectedItem = value; }
         }
 
-        // Repository Instance
+        // REPOSITORY INSTANCE
         private TodoRepository _repository;
 
         #endregion
@@ -37,47 +36,26 @@ namespace UWP_Todo_App.ViewModels
         {
             Items = new ObservableCollection<TodoItemViewModel>();
             _repository = repository;
-            getTodos();
+            repository.UpdateRepository += new RepositoryChanged(getTodos);
+            getTodos(_repository);
         }
 
         #region Methods
+        // DELETE
         public void DeleteItem()
         {
             if (selectedItem != null)
             {
-                TodoItem itemToRemove = new TodoItem()
-                {
-                    Title = selectedItem.Title,
-                    Description = selectedItem.Description,
-                    ID = selectedItem.ID,
-                    IsDone = selectedItem.IsDone
-                };
-
-                _repository.Delete(itemToRemove);
-                getTodos();
+                _repository.Delete(selectedItem.ID);
             }
         }
 
-
-        public void AddItem()
+        // On Repository Update, Update Collection
+        private void getTodos(TodoRepository repository)
         {
-            newTodo.ID = 0;
-            _repository.Add(new TodoItem()
-            {
-                ID = newTodo.ID,
-                Title = newTodo.Title,
-                Description = newTodo.Description,
-                IsDone = newTodo.IsDone
-            });
-            getTodos();
-            newTodo.Save();
-        }
-
-        private void getTodos()
-        {
-            var items = _repository.GetAll();
+            var items = repository.GetAll();
             Items.Clear();
-            foreach (var item in items) Items.Add(new TodoItemViewModel(item));
+            foreach (var item in items) Items.Add(new TodoItemViewModel(item, _repository));
         }
 
         #endregion
