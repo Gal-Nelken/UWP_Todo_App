@@ -68,7 +68,6 @@ namespace UWP_Todo_App.Models
                 todo.Description = todoItem.Description;
                 todo.IsDone = todoItem.IsDone;
             }
-            UpdateRepository(Instance);
         }
 
         // Delete
