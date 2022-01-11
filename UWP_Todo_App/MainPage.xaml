@@ -6,186 +6,122 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:UWP_Todo_App.ViewModels"
+    xmlns:view="using:UWP_Todo_App.Views"
     xmlns:convertors="using:UWP_Todo_App.Views.Convertors"
     mc:Ignorable="d"
-    
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
     <Page.Resources>
-        <vm:TodoItemViewModel x:Key="itemVM"/>
-        <vm:TodoListViewModel x:Key="listVM" />
         <convertors:BoolToColorConvertor x:Key="boolToColor" />
         <convertors:BoolToVisibilityConvertor x:Key="boolToVisibility" />
     </Page.Resources>
-
-    <Grid DataContext="{StaticResource listVM}" Background="#242638" Margin="5">
+    
+    <Grid Background="{StaticResource clr3}" Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-
       
             <TextBlock Text="Todo Items"
-                       Foreground="#FAE800"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       FontSize="30" 
-                       Margin="20,20,0,20"/>
-        
+                       Style="{StaticResource MainTitle}"/>
 
-        <!--__________________________________// TODOS CONTAINER \\______________________________________-->
+       <!--#region TODOS CONTAINER-->
 
         <ListView Grid.Row="1" Grid.RowSpan="2"
-                  Background="#33364f"
-                  ItemsSource="{Binding Items, Mode=OneTime}"
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border Padding="5"
+                  Background="{StaticResource clr4}"
+                  HorizontalAlignment="Stretch"
+                  ItemsSource="{x:Bind listVM.Items, Mode=OneTime}"
+                  SelectedItem="{x:Bind listVM.SelectedItem, Mode=TwoWay}">
+            
+            <!--#region ListViewItem For Styling-->
+            <ListViewItem IsSelected="True" HorizontalContentAlignment="Stretch">
+                <Border Padding="5" Margin="20,0" Height="100"
                             HorizontalAlignment="Stretch"
                             BorderThickness="0,0,0,2"
                             BorderBrush="Gray">
-                        
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
-                        
-                        <CheckBox Margin="10,0,15,0"
-                            IsChecked="{Binding IsDone, Mode=TwoWay}"/>
-                        
-                            
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding Title, Mode=OneTime}"
-                                       Foreground="{Binding IsDone, Converter={StaticResource boolToColor}, ConverterParameter=title}"
-                                       />
-                            <TextBlock Text="{Binding Description, Mode=OneTime}" 
-                                       Foreground="{Binding IsDone, Converter={StaticResource boolToColor}}"/>
+                        <CheckBox  IsChecked="True"/>
+                        <StackPanel Orientation="Vertical" >
+                            <TextBlock Style="{StaticResource SubTitle}"
+                                          Text="1. Title"/>
+                            <TextBlock Style="{StaticResource paragraph}"
+                                    Text="asdlkfjas dlkfasmd lfkmasdlkfds msfdlmnfsld kgmnsfdlkgm asrdlm gasld;k mg;laskdmg ;laskm;las mgd;l"/>
                         </StackPanel>
                     </StackPanel>
-                    </Border>
+                </Border>
+            </ListViewItem>
+            <!--#endregion-->
+            
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="vm:TodoItemViewModel">
+                    <Border Padding="5" 
+                            Margin="20,0" 
+                            HorizontalAlignment="Stretch"
+                            BorderThickness="0,0,0,2"
+                            BorderBrush="Gray">
+            
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top">
+                        
+                        <CheckBox IsChecked="{x:Bind IsDone, Mode=TwoWay}"/>
+                        
+                        
+                        <!-- TODO: Find why converter isn't working
+                                    Foreground="{x:Bind IsDone, Converter={StatiResource boolToColor}, ConverterParameter=title}"
+                                       Foreground="{x:Bind IsDone, Converter={SctaticResource boolToColor}}"
+                        -->
+                            
+                        <StackPanel Orientation="Vertical">
+                                <TextBlock Style="{StaticResource SubTitle}">
+                                    <Run Text="{x:Bind ID, Mode=OneTime}"/>. <Run Text="{x:Bind Title, Mode=OneTime}"/>
+                                </TextBlock> 
+                                       
+                                <TextBlock Style="{StaticResource paragraph}"
+                                    Text="{x:Bind Description, Mode=OneTime}"/>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                      
                     
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+            <!--#endregion-->
 
-        <!--______________________________// BUTTONS CONTAINER \\______________________________________-->
-
+        <!--#region BUTTONS CONTAINER-->
         <StackPanel 
             x:Name="BtnsContainer"
             Orientation="Horizontal"
             HorizontalAlignment="Right"
             Grid.Row="2" 
             Margin="0 0 25 15">
-
+            <!-- TODO: Design buttons-->
             <Button x:Name="removeTodosBtn" Content="🗑" 
 					Margin="0,0,15,0"
                     FontSize="25"
-                    Command="{Binding RemoveButtonCommand}"
-                     ToolTipService.ToolTip="Remove selected todo"/>
+                    Click="{x:Bind listVM.DeleteItem}"
+                    ToolTipService.ToolTip="Remove selected todo"/>
 
             <Button x:Name="addTodoBtn" 
                     Content="➕"
-					Click="addTodoBtn_Click"
                     FontSize="25"
+                    Click="addTodoBtn_Click"
                     ToolTipService.ToolTip="Add new todo"/>
-
         </StackPanel>
-
-
-
-
-        <!--_________________________________// ADD TODO MODAL \\______________________________________-->
-
-        <Border DataContext="{StaticResource itemVM}"
-                x:Name="AddTodoModal"
-                Visibility="Collapsed"
-			    Grid.Row="1" 
-                HorizontalAlignment="center"  
-                VerticalAlignment="center" 
-                MinHeight="200" MinWidth="400"
-	    		Background="#FF242638"
-	    		BorderThickness="4" 
-		    	BorderBrush="#33464f"
-	    		Padding="15" >
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-
-                <!-- MODAL TITLE -->
-                <TextBlock Text="Add New Todo" 
-                           Foreground="#FAE800" FontSize="25"
-				        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                        HorizontalAlignment="Center"/>
-
-                <!-- NEW TODO TITLE -->
-                <TextBlock Text="Title:"
-				        Grid.Column="0" Grid.Row="1"  
-                        HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Margin="10,0,0,10"/>
-               
-                <TextBox Text="{Binding Title, Mode=TwoWay}"
-                        Height="30"
-                        HorizontalAlignment="Stretch" VerticalAlignment="Center"
-				        Grid.Column="1"  Grid.Row="1" 
-                />
-
-                <!-- NEW TODO DESCRIPTION -->
-                <TextBlock Text="Description:"
-                           HorizontalAlignment="Left" VerticalAlignment="Center"
-				Grid.Column="0" Grid.Row="2"  
-                Margin="10,0,0,10" />
-				 
-                <TextBox 
-				Grid.Column="1" Grid.Row="2"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                Height="30"
-                    Text="{Binding Description, Mode=TwoWay}"
-                />
-
-                <!-- NEW TODO ACTIONS BTNS -->
-                <StackPanel
-                Orientation="Horizontal"
-                Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
-                HorizontalAlignment="Center">
-
-                    <!-- Submit Btn -->
-				
-                    <Button Command="{Binding AddButtonCommand}" 
-                            CommandParameter="{Binding Title}"
-                            x:Name="submitBtn" Content="➕" 
-                            Margin="0,0,50,0"
-                            ToolTipService.ToolTip="Add todo"/>
-              
-
-                    <!-- Cancel Btn -->
-                    <Button Content="❌"
-                            Click="cancelBtn_Click"
-                            ToolTipService.ToolTip="Cancel"/>
-                    
-                </StackPanel>
-            </Grid>
-        </Border>
-
-
-
-
-
-
-
-
-
-
+        <!--#endregion-->
+        
+        <!-- TODO: Pass the list to userControl and assign new item as data source-->
+        <view:AddNewTodo 
+            x:Name="AddTodoModal"
+            Visibility="Collapsed" 
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center" 
+            Grid.Row="1"/>
 
     </Grid>
 </Page>

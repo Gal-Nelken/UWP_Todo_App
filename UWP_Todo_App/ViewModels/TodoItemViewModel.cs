@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UWP_Todo_App.ViewModels.Commands;
 using UWP_Todo_App.Models;
 
 namespace UWP_Todo_App.ViewModels
 {
     public class TodoItemViewModel : TodoItem
     {
-        public AddTodoCommand AddButtonCommand { get; set; }
-
+        #region Fields
+        
         private bool isEditMode;
 
         public bool IsEditMode
@@ -20,15 +19,19 @@ namespace UWP_Todo_App.ViewModels
             set { isEditMode = value; }
         }
 
+        #endregion
+
+        #region Constructors
+        // Constructor for new TodoItem
         public TodoItemViewModel()
         {
-            AddButtonCommand = new AddTodoCommand(this);
             Description = "";
             Title = "";
             IsDone = false;
-            IsEditMode = true;
+            IsEditMode = false;
         }
 
+        // Constructor for converting TodoItem to TodoItemViewModel
         public TodoItemViewModel(TodoItem todoitem)
         {
             ID = todoitem.ID;
@@ -38,19 +41,16 @@ namespace UWP_Todo_App.ViewModels
             IsEditMode = false;
         }
 
+        #endregion
+
+        #region Methods
         public void Save()
         {
-            TodoItem todoItem = new TodoItem
-            {
-                Title = Title,
-                Description = Description,
-                IsDone = false
-            };
-            TodoRepository repository = new TodoRepository();
-            repository.Add(todoItem);
-            Title = "";
             Description = "";
-            isEditMode = false;
+            Title = "";
         }
+
+        #endregion
+
     }
 }

@@ -3,15 +3,274 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UWP_Todo_App">
+    
 
     <Application.Resources>
         
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Views/Styles/Colors.xaml" />
+                
+                <!-- TODO: Check why resource dictionary doesn't work
+                <ResourceDictionary Source="Views/Styles/Text.xaml" />
+                <ResourceDictionary Source="Views/Styles/CheckBox.xaml" />
+                -->
+                
+                <!--#region TEXT DICTIONARY-->
+                <ResourceDictionary>
+
+                    <!-- TEXBOX -->
+            <Style TargetType="TextBox">
+                <Setter Property="Width" Value="250" />
+                <Setter Property="Margin" Value="5,10" />
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+            </Style>
+
+                    <!-- MAIN TITLE -->
+            <Style TargetType="TextBlock" x:Key="MainTitle">
+                <Setter Property="Foreground" Value="{StaticResource clr2}" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="Margin" Value="10,0,0,10" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+
+                    <!-- SUB TITLE -->
+            <Style TargetType="TextBlock" x:Key="SubTitle">
+                <Setter Property="Foreground" Value="{StaticResource clr1}" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="MaxWidth" Value="200" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5,0,10,0" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+
+                    <!-- PARAGRAPH -->
+            <Style TargetType="TextBlock" x:Key="paragraph">
+                <Setter Property="Foreground" Value="{StaticResource clr6}" />
+                <Setter Property="MaxWidth" Value="600" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+            </Style>
+                </ResourceDictionary>
+                <!--#endregion-->
+
+                <!--#region CHECKBOX DICTIONARY -->
+                <ResourceDictionary>
+                    
+                    <Style TargetType="CheckBox">
+                        <Setter Property="Foreground" Value="{StaticResource clr4}" />
+                        <Setter Property="Margin" Value="10,0" />
+                        <Setter Property="MinWidth" Value="30" />
+                        <Setter Property="MinHeight" Value="30" />
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="CheckBox">
+                                    <Grid x:Name="rootGrid"
+                                        CornerRadius="1" 
+                                        Background="Transparent"
+                                        BorderBrush="{StaticResource clr1}" 
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        Width="25"
+                                        Height="25"
+                                        BorderThickness="3" >
+
+                                        <Rectangle x:Name="rectangle"
+                                                   Stroke="Transparent"
+                                                   Fill="Transparent"/>
+                                        
+                                        <ContentPresenter x:Name="contentPresenter"
+                                                          Background="Transparent"
+                                                          TextWrapping="Wrap"/>
+                                        
+                                        <FontIcon x:Name="checkGlyph"
+                                                  FontWeight="Thin"
+                                                  Foreground="{ThemeResource CheckBoxCheckGlyphForegroundUnchecked}" 
+                                                  Glyph="&#xE001;"
+                                                  Opacity="0"/>
+
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CombinedStates">
+                                                <VisualState x:Name="UncheckedPointerOver" >
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr2}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="UncheckedNormal">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr1}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="CheckedNormal">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="Foreground">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr3}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rootGrid" Storyboard.TargetProperty="Background">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr2}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr2}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="Fill">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr2}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="Stroke">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr2}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="checkGlyph" Storyboard.TargetProperty="Foreground">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr3}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="checkGlyph" Storyboard.TargetProperty="FontSize">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="rectangle" To="0" Storyboard.TargetProperty="StrokeThickness"/>
+                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="checkGlyph" To="1" Storyboard.TargetProperty="Opacity"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="CheckedPointerOver">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="Foreground">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr3}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rootGrid" Storyboard.TargetProperty="Background">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr2}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr2}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="Fill">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr2}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="Stroke">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr2}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="checkGlyph" Storyboard.TargetProperty="Foreground">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr3}"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="checkGlyph" Storyboard.TargetProperty="FontSize">
+                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="20"/>
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="rectangle" To="0" Storyboard.TargetProperty="StrokeThickness"/>
+                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="checkGlyph" To="1" Storyboard.TargetProperty="Opacity"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    
+                    
+                </ResourceDictionary>
+                <!--#endregion-->
+
+                <!--#region LISTVIEWITEM DICTIONARY-->
+                <ResourceDictionary>
+
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="BorderBrush" Value="{StaticResource clr2}" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <ListViewItemPresenter x:Name="Root" 
+                                                           RevealBorderThickness="0" 
+                                                           RevealBorderBrush="Transparent"
+                                                           SelectedPointerOverBackground="{StaticResource clr3}" 
+                                                           SelectedBackground="{StaticResource clr3}" 
+                                                           SelectedPressedBackground="{StaticResource clr3}"
+                                                           SelectedBorderThickness="10,0,0,0">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                
+                                                <VisualState x:Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="Root.RevealBorderBrush" Value="Transparent"/>
+                                                        <Setter Target="Root.RevealBorderThickness" Value="0"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                
+                                                <VisualState x:Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="Root.RevealBorderBrush" Value="{StaticResource clr2}"/>
+                                                        <Setter Target="Root.RevealBorderThickness" Value="6,0,0,0"/>
+                                                    </VisualState.Setters>                                                    
+                                                </VisualState>
+                                                
+                                                <VisualState x:Name="PointerOverSelected">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="Root.RevealBorderBrush" Value="{StaticResource clr2}"/>
+                                                        <Setter Target="Root.RevealBorderThickness" Value="6,0,0,0"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                
+                                                <VisualState x:Name="Pressed">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="Root.RevealBorderBrush" Value="{StaticResource clr2}"/>
+                                                        <Setter Target="Root.Background" Value="{StaticResource clr3}"/>
+                                                        <Setter Target="Root.RevealBorderThickness" Value="3,0,0,0"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                
+                                                <VisualState x:Name="PressedSelected">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="Root.RevealBorderBrush" Value="{StaticResource clr2}"/>
+                                                        <Setter Target="Root.RevealBorderThickness" Value="6,0,0,0"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                    
+                                                <VisualState x:Name="PointerOverPressedSelected">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
+                                                        <Setter Target="Root.RevealBorderBrush" Value="{StaticResource clr2}"/>
+                                                        <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </ListViewItemPresenter>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </ResourceDictionary>
+                <!--#endregion-->
+                
+                <!--#region BUTTONS DICTIONARY-->
+                <ResourceDictionary>
+
+                    <Style TargetType="Button">
+                        
+                        
+                        
+                    </Style>
+                    
+                </ResourceDictionary>
+                <!--#endregion -->
                 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Application.Resources>
-    
 
+    </Application.Resources>
 </Application>

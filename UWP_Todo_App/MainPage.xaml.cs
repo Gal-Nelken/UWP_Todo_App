@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWP_Todo_App.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -13,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace UWP_Todo_App
@@ -22,19 +24,21 @@ namespace UWP_Todo_App
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private TodoListViewModel listVM;
+
         public MainPage()
         {
             this.InitializeComponent();
+            listVM = new TodoListViewModel(Models.TodoRepository.Instance);
+
+
+            listVM.NewTodo = new TodoItemViewModel();
+            AddTodoModal.listVM = listVM;
         }
 
         private void addTodoBtn_Click(object sender, RoutedEventArgs e)
         {
             AddTodoModal.Visibility = Visibility.Visible;
-        }
-
-        private void cancelBtn_Click(object sender, RoutedEventArgs e)
-        {
-            AddTodoModal.Visibility = Visibility.Collapsed ;
         }
     }
 }

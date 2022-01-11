@@ -13,6 +13,7 @@ namespace UWP_Todo_App.Views.Convertors
 	{
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+			if (value == null) return "Gray";
 			if (parameter is "title")
 			{
 				return value is true ? "DimGray" : "White";
@@ -23,6 +24,7 @@ namespace UWP_Todo_App.Views.Convertors
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
+			if (value == null) return "Gray";
 			if (parameter is "title")
 			{
 				return value is true ? "White" : "DimGray";

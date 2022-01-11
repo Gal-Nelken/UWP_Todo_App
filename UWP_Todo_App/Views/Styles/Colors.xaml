@@ -7,5 +7,6 @@
     <SolidColorBrush x:Key="clr3" Color="#242638" />
     <SolidColorBrush x:Key="clr4" Color="#33364f" />
     <SolidColorBrush x:Key="clr5" Color="#fc4580" />
+    <SolidColorBrush x:Key="clr6" Color="LightGray" />
 
 </ResourceDictionary>

@@ -1,5 +1,4 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,16 +10,16 @@ namespace UWP_Todo_App.Models
     public class TodoItem : INotifyPropertyChanged
     {
         private int id;
-
-        [PrimaryKey, AutoIncrement]
         public int ID
         {
             get { return id; }
-            set { id = value; }
+            set { 
+                id = value; 
+                OnPropertyChanged("ID");
+            }
         }
 
         private bool isDone;
-
         public bool IsDone
         {
             get { return isDone; }
@@ -32,7 +31,6 @@ namespace UWP_Todo_App.Models
         }
 
         private string title;
-
         public string Title
         {
             get { return title; }
@@ -44,8 +42,6 @@ namespace UWP_Todo_App.Models
         }
 
         private string description;
-
-
         public string Description
         {
             get { return description; }
