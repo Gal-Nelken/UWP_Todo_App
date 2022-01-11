@@ -100,28 +100,30 @@
             HorizontalAlignment="Right"
             Grid.Row="2" 
             Margin="0 0 25 15">
-            <!-- TODO: Design buttons-->
-            <Button x:Name="removeTodosBtn" Content="🗑" 
-					Margin="0,0,15,0"
-                    FontSize="25"
+            <!-- TODO: Design Buttons-->
+            <Button x:Name="removeTodosBtn" 
+                    Content="🗑" 
+					Style="{StaticResource DangerBtn}"
                     Click="{x:Bind listVM.DeleteItem}"
                     ToolTipService.ToolTip="Remove selected todo"/>
-
+                    <!--
+            -->
             <Button x:Name="addTodoBtn" 
+					Style="{StaticResource ApproveBtn}"
                     Content="➕"
-                    FontSize="25"
                     Click="addTodoBtn_Click"
                     ToolTipService.ToolTip="Add new todo"/>
         </StackPanel>
         <!--#endregion-->
         
-        <!-- TODO: Pass the list to userControl and assign new item as data source-->
+        <!--#region Add Todo Modal-->
         <view:AddNewTodo 
             x:Name="AddTodoModal"
             Visibility="Collapsed" 
             VerticalAlignment="Center" 
             HorizontalAlignment="Center" 
             Grid.Row="1"/>
+        <!--#endregion-->
 
     </Grid>
 </Page>

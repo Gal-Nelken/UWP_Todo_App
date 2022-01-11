@@ -32,7 +32,7 @@
 
             <TextBlock Text="Add New Todo" 
 				        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                       HorizontalAlignment="Center" FontSize="25"
+                       HorizontalAlignment="Center" FontSize="25" TextDecorations="Underline"
                         Style="{StaticResource MainTitle}"/>
 
             <TextBlock Text="Title:"
@@ -56,18 +56,19 @@
                 Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
                 HorizontalAlignment="Center">
 
-
-                <Button x:Name="submitBtn" 
-                        Click="submitBtn_Click"
-                        Content="➕" 
-                        Margin="0,0,50,0"
-                        ToolTipService.ToolTip="Add todo"/>
-
-
-                <Button Content="❌"
+                <Button Content="X"
                         x:Name="CloseModalBtn"
+                        Style="{StaticResource DangerBtn}"
+                        Margin="0,0,50,0"
                         Click="CloseModalBtn_Click"
                             ToolTipService.ToolTip="Cancel"/>
+
+                <Button x:Name="submitBtn" 
+                        Style="{StaticResource ApproveBtn}"
+                        Click="submitBtn_Click"
+                        Content="➕" 
+                        ToolTipService.ToolTip="Add todo"/>
+
 
             </StackPanel>
         </Grid>
