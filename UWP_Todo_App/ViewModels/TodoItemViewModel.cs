@@ -108,7 +108,7 @@ namespace UWP_Todo_App.ViewModels
         // --- Update Item --- 
         public void Update()
         {
-            _repository.Update(new TodoItem(Title, Description, IsDone));
+            _repository.Update(new TodoItem(Title, Description, IsDone, ID));
         }
 
         // --- Save New Item --- 

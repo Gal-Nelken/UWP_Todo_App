@@ -23,7 +23,7 @@ namespace UWP_Todo_App.Models
 
             for (int i = 0; i < 6; i++)
             {
-                _todoItems.Add(new TodoItem($"Todo{i + 1}", "Do something, Text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text"));
+                _todoItems.Add(new TodoItem($"Todo{i + 1}", "Do something, Text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text", false));
             }
         }
 

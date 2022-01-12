@@ -7,15 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:UWP_Todo_App.ViewModels"
     xmlns:view="using:UWP_Todo_App.Views"
-    xmlns:convertors="using:UWP_Todo_App.Views.Convertors"
+    xmlns:helpers="using:UWP_Todo_App.Helpers"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
-    <Page.Resources>
-        <convertors:BoolToColorConvertor x:Key="boolToColor" />
-        <convertors:BoolToVisibilityConvertor x:Key="boolToVisibility" />
-    </Page.Resources>
-    
+ 
     <Grid Background="{StaticResource clr3}" Margin="1" x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -68,7 +63,6 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top">
                         
-                        <!-- TODO: Fix bug on saving or deleting todo, IsChecked return to false-->
                         <CheckBox IsChecked="{x:Bind IsDone, Mode=TwoWay}"
                                   Click="{x:Bind Update}"/>
                         
@@ -76,12 +70,12 @@
                             
                         <StackPanel Orientation="Vertical">
                                 <TextBlock Style="{StaticResource SubTitle}"
-                                    Foreground="{x:Bind IsDone, Mode=OneWay, Converter={StaticResource boolToColor}, ConverterParameter=title}">
+                                    Foreground="{x:Bind helpers:XBindHelpers.BoolToColorTitle(IsDone), Mode=OneWay}">
                                     <Run Text="{x:Bind Idx, Mode=OneWay}"/>. <Run Text="{x:Bind Title, Mode=OneTime}"/>
                                 </TextBlock> 
                                        
                                 <TextBlock Style="{StaticResource paragraph}"
-                                    Foreground="{x:Bind IsDone, Mode=OneWay, Converter={StaticResource boolToColor}}"
+                                    Foreground="{x:Bind helpers:XBindHelpers.BoolToColorDesc(IsDone), Mode=OneWay}"
                                     Text="{x:Bind Description, Mode=OneTime}"/>
                         </StackPanel>
                      </StackPanel>

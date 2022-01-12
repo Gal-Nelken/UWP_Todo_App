@@ -37,9 +37,10 @@ namespace UWP_Todo_App.Models
 
 
         #region Constructor
-        public TodoItem(string title, string description, bool isDone =  false)
+        public TodoItem(string title, string description, bool isDone, int id = 0)
         {
-            ID = getRandomInt();
+            if (id == 0) ID = getRandomInt();
+            else ID = id;
             Title = title;
             Description = description;
             IsDone = isDone;

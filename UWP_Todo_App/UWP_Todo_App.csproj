@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\XBindHelpers.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -130,8 +131,6 @@
     <Compile Include="Views\AddNewTodo.xaml.cs">
       <DependentUpon>AddNewTodo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Convertors\BoolToColorConvertor.cs" />
-    <Compile Include="Views\Convertors\BoolToVisibilityConvertor.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
