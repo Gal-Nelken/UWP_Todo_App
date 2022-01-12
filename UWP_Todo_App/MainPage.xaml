@@ -77,15 +77,14 @@
                         <StackPanel Orientation="Vertical">
                                 <TextBlock Style="{StaticResource SubTitle}"
                                     Foreground="{x:Bind IsDone, Mode=OneWay, Converter={StaticResource boolToColor}, ConverterParameter=title}">
-                                    <Run Text="{x:Bind ID, Mode=OneTime}"/>. <Run Text="{x:Bind Title, Mode=OneTime}"/>
+                                    <Run Text="{x:Bind Idx, Mode=OneWay}"/>. <Run Text="{x:Bind Title, Mode=OneTime}"/>
                                 </TextBlock> 
                                        
                                 <TextBlock Style="{StaticResource paragraph}"
                                     Foreground="{x:Bind IsDone, Mode=OneWay, Converter={StaticResource boolToColor}}"
                                     Text="{x:Bind Description, Mode=OneTime}"/>
                         </StackPanel>
-                        
-                    </StackPanel>
+                     </StackPanel>
                       
                     
                     </Border>

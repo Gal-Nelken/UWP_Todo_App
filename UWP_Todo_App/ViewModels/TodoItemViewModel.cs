@@ -12,19 +12,26 @@ namespace UWP_Todo_App.ViewModels
     {
         #region Fields
 
-        // ID
+        // --- ID --- 
         private int id;
         public int ID
         {
             get { return id; }
-            set
-            {
-                id = value;
-                OnPropertyChanged("ID");
+            set { id = value; }
+        }
+
+        // --- INDEX --- 
+        private int idx;
+        public int Idx
+        {
+            get { return idx; }
+            set { 
+                idx = value;
+                OnPropertyChanged("Idx");
             }
         }
 
-        // IsDone
+        // --- IsDone --- 
         private bool isDone;
         public bool IsDone
         {
@@ -38,7 +45,7 @@ namespace UWP_Todo_App.ViewModels
             }
         }
 
-        // Title
+        // --- Title --- 
         private string title;
         public string Title
         {
@@ -50,7 +57,7 @@ namespace UWP_Todo_App.ViewModels
             }
         }
 
-        // Description
+        // --- Description --- 
         private string description;
         public string Description
         {
@@ -61,69 +68,53 @@ namespace UWP_Todo_App.ViewModels
                 OnPropertyChanged("Description");
             }
         }
-        
-        // IsEditMode
-        private bool isEditMode;
-        public bool IsEditMode
-        {
-            get { return isEditMode; }
-            set { isEditMode = value; }
-        }
+
+        #endregion
 
 
-        // Repository Instance
+        #region Propertys
+        // --- Repository Instance --- 
         private TodoRepository _repository;
 
         #endregion
 
+
         #region Constructors
-        // Constructor for new TodoItem ---- TODO bring repo
+        // --- Constructor for new TodoItem View-Model --- 
         public TodoItemViewModel(TodoRepository repository)
         {
             Description = "";
             Title = "";
             IsDone = false;
-            IsEditMode = false;
             _repository = repository;
         }
 
-        // Constructor for converting TodoItem to TodoItemViewModel
-        public TodoItemViewModel(TodoItem todoitem, TodoRepository repository)
+        // --- Constructor for converting TodoItem to TodoItemViewModel --- 
+        public TodoItemViewModel(TodoItem todoitem, int idx, TodoRepository repository)
         {
             ID = todoitem.ID;
+            Idx = idx;
             Description = todoitem.Description;
             Title = todoitem.Title;
             IsDone = todoitem.IsDone;
-            IsEditMode = false;
             _repository = repository;
         }
 
         #endregion
 
+
         #region Methods
 
-        // Update Item
+        // --- Update Item --- 
         public void Update()
         {
-            _repository.Update(new TodoItem()
-            {
-                ID = this.ID,
-                IsDone = this.IsDone,
-                Title = this.Title,
-                Description = this.Description
-            });
+            _repository.Update(new TodoItem(Title, Description, IsDone));
         }
 
-        // Save New Item
+        // --- Save New Item --- 
         public void Save()
         {
-            _repository.Add(new TodoItem()
-            {
-                ID = 0,
-                IsDone = false,
-                Title = this.Title,
-                Description = this.Description
-            });
+            _repository.Add(new TodoItem(Title, Description, IsDone));
         }
 
         #endregion

@@ -24,6 +24,9 @@ namespace UWP_Todo_App.Views
         // ITEM VIEW-MODAL
         private TodoItemViewModel itemVM { get; set; }
 
+        #endregion
+
+        #region Propertys
         // PARENT ELEMENT FOR CLOSING MODAL
         public Grid ParentControl;
 

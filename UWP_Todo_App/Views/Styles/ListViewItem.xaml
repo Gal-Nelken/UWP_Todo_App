@@ -3,6 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
+    <ResourceDictionary.MergedDictionaries >
+        <ResourceDictionary Source="/Views/Styles/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
     <Style TargetType="ListViewItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -13,12 +18,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
                     <ListViewItemPresenter x:Name="Root" 
-                                                           RevealBorderThickness="0" 
-                                                           RevealBorderBrush="Transparent"
-                                                           SelectedPointerOverBackground="{StaticResource clr3}" 
-                                                           SelectedBackground="{StaticResource clr3}" 
-                                                           SelectedPressedBackground="{StaticResource clr3}"
-                                                           SelectedBorderThickness="10,0,0,0">
+                         RevealBorderThickness="0" 
+                         RevealBorderBrush="Transparent"
+                         SelectedPointerOverBackground="{StaticResource clr3}" 
+                         SelectedBackground="{StaticResource clr3}" 
+                         SelectedPressedBackground="{StaticResource clr3}"
+                         SelectedBorderThickness="10,0,0,0">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
 

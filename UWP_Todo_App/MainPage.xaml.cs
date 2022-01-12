@@ -45,5 +45,6 @@ namespace UWP_Todo_App
             Grid.SetRow(newTodoModal, 1);
             newTodoModal.ParentControl = MainGrid;
         }
+
     }
 }

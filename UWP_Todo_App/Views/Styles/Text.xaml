@@ -2,6 +2,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <ResourceDictionary.MergedDictionaries >
+        <ResourceDictionary Source="/Views/Styles/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
 
     <!-- TEXBOX -->
     <Style TargetType="TextBox">
@@ -26,7 +30,7 @@
     <Style TargetType="TextBlock" x:Key="SubTitle">
         <Setter Property="Foreground" Value="{StaticResource clr1}" />
         <Setter Property="FontSize" Value="18" />
-        <Setter Property="MaxWidth" Value="200" />
+        <Setter Property="MaxWidth" Value="450" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
