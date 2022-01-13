@@ -90,14 +90,24 @@ namespace UWP_Todo_App.ViewModels
         }
 
         // --- Constructor for converting TodoItem to TodoItemViewModel --- 
-        public TodoItemViewModel(TodoItem todoitem, int idx, TodoRepository repository)
+        public TodoItemViewModel(TodoItem todoItem, int idx, TodoRepository repository)
         {
-            ID = todoitem.ID;
+            ID = todoItem.ID;
             Idx = idx;
-            Description = todoitem.Description;
-            Title = todoitem.Title;
-            IsDone = todoitem.IsDone;
+            Description = todoItem.Description;
+            Title = todoItem.Title;
+            IsDone = todoItem.IsDone;
             _repository = repository;
+        }       
+
+        // --- Constructor for Edit TodoItem: a copy for the original item --- 
+        public TodoItemViewModel(TodoItemViewModel todoItem)
+        {
+            ID = todoItem.ID;
+            Description = todoItem.Description;
+            Title = todoItem.Title;
+            IsDone = todoItem.IsDone;
+            _repository = todoItem._repository;
         }
 
         #endregion

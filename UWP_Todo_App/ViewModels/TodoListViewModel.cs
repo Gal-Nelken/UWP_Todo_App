@@ -27,7 +27,7 @@ namespace UWP_Todo_App.ViewModels
 
         #endregion
 
-        // --- CONSTRUCTOR --- 
+        #region CONSTRUCTOR 
         public TodoListViewModel(TodoRepository repository)
         {
             Items = new ObservableCollection<TodoItemViewModel>();
@@ -35,6 +35,8 @@ namespace UWP_Todo_App.ViewModels
             repository.UpdateRepository += getTodos;
             getTodos(_repository);
         }
+
+        #endregion
 
         #region Methods
         // --- DELETE --- 

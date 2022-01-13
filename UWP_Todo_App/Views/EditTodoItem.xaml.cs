@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UWP_Todo_App.Views
 {
-    public sealed partial class AddNewTodo : UserControl
+    public sealed partial class EditTodoItem : UserControl
     {
         #region Fields
         // ITEM VIEW-MODAL
@@ -34,10 +34,10 @@ namespace UWP_Todo_App.Views
 
 
         #region Constructor
-        public AddNewTodo()
+        public EditTodoItem(TodoItemViewModel item)
         {
             this.InitializeComponent();
-            itemVM = new TodoItemViewModel(Models.TodoRepository.Instance);
+            itemVM = new TodoItemViewModel(item);
         }
         #endregion
 
@@ -46,14 +46,14 @@ namespace UWP_Todo_App.Views
         // CLOSE MODAL
         private void CloseModalBtn_Click(object sender, RoutedEventArgs e)
         {
-            ParentControl.Children.Remove(this);            
+            ParentControl.Children.Remove(this);
         }
 
         // SAVE ITEM
         private void submitBtn_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(itemVM.Title) || string.IsNullOrWhiteSpace(itemVM.Description)) return;
-            itemVM.Save();
+            itemVM.Update();
             ParentControl.Children.Remove(this);
             
         }

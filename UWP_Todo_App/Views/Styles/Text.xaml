@@ -7,15 +7,16 @@
     </ResourceDictionary.MergedDictionaries>
 
 
-    <!-- TEXBOX -->
+    <!--#region TEXBOX -->
     <Style TargetType="TextBox">
         <Setter Property="Width" Value="250" />
         <Setter Property="Margin" Value="5,10" />
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left" />
     </Style>
+    <!--#endregion-->
 
-    <!-- MAIN TITLE -->
+    <!--#region MAIN TITLE -->
     <Style TargetType="TextBlock" x:Key="MainTitle">
         <Setter Property="Foreground" Value="{StaticResource clr2}" />
         <Setter Property="FontSize" Value="30" />
@@ -25,8 +26,20 @@
         <Setter Property="Margin" Value="10,0,0,10" />
         <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
+    <!--#endregion-->
 
-    <!-- SUB TITLE -->
+    <!--#region MODAL TITLE -->
+    <Style TargetType="TextBlock" x:Key="ModalTitle">
+        <Setter Property="Foreground" Value="{StaticResource clr2}" />
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0,0,0,10" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region SUB TITLE -->
     <Style TargetType="TextBlock" x:Key="SubTitle">
         <Setter Property="Foreground" Value="{StaticResource clr1}" />
         <Setter Property="FontSize" Value="18" />
@@ -37,12 +50,14 @@
         <Setter Property="Margin" Value="5,0,10,0" />
         <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
+    <!--#endregion-->
 
-    <!-- PARAGRAPH -->
+    <!--#region PARAGRAPH -->
     <Style TargetType="TextBlock" x:Key="paragraph">
         <Setter Property="Foreground" Value="{StaticResource clr6}" />
         <Setter Property="MaxWidth" Value="600" />
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
+    <!--#endregion-->
 
 </ResourceDictionary>

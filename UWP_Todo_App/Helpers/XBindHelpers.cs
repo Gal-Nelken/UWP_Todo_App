@@ -11,13 +11,17 @@ namespace UWP_Todo_App.Helpers
     public static class XBindHelpers
     {
 
-        public static SolidColorBrush BoolToColorTitle(bool isDone)
+        public static SolidColorBrush BoolToColor(bool isDone, string param = "")
         {
-            return isDone ? new SolidColorBrush(Colors.LightGray) : new SolidColorBrush(Colors.White);
-        }  
-        public static SolidColorBrush BoolToColorDesc(bool isDone)
-        {
-            return isDone ? new SolidColorBrush(Colors.Gray) : new SolidColorBrush(Colors.LightGray);
+            if (param == "title")
+            {
+            return isDone ? new SolidColorBrush(Colors.DimGray) : new SolidColorBrush(Colors.White);
+            }
+            if (param == "desc")
+            {
+                return isDone ? new SolidColorBrush(Colors.Gray) : new SolidColorBrush(Colors.LightGray);
+            }
+            return new SolidColorBrush(Colors.White);
         }
     }
 }

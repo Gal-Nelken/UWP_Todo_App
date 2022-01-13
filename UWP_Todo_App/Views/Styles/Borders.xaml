@@ -1,0 +1,35 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Views/Styles/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+<!--#region Default Border -->
+    <Style TargetType="Border" >
+        <Setter Property="BorderBrush" Value="{StaticResource clr7}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+    <!--#endregion-->
+
+    <!--#region Modal Title Border -->
+    <Style TargetType="Border" x:Key="ModalTitleBorder">
+        <Setter Property="BorderBrush" Value="{StaticResource clr7}" />
+        <Setter Property="BorderThickness" Value="0,0,0,2" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+    <!--#endregion-->
+    
+    <!--#region Modal Frame Border -->
+    <Style TargetType="Border" x:Key="ModalFrame">
+        <Setter Property="BorderBrush" Value="{StaticResource clr6}" />
+        <Setter Property="Background" Value="{StaticResource clr8}" />
+        <Setter Property="BorderThickness" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+    <!--#endregion-->
+    
+</ResourceDictionary>

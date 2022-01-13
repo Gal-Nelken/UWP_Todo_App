@@ -6,18 +6,18 @@
         <ResourceDictionary Source="/Views/Styles/Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- ADD/APPROVE BUTTON -->
+    <!-- #region ADD/APPROVE BUTTON -->
     <Style TargetType="Button" x:Key="ApproveBtn">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <ContentPresenter x:Name="contentPresenter"
-                                                      Foreground="{StaticResource clr6}" Background="{StaticResource clr2}" 
-                                                      BorderBrush="{StaticResource clr3}" BorderThickness="2"
-                                                      HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"
-                                                      Height="50" Width="50" Margin="10" 
-                                                      FontSize="25" CornerRadius="25" >
-
+                        Foreground="{StaticResource clr6}" Background="{StaticResource clr2}" 
+                        BorderBrush="{StaticResource clr3}" BorderThickness="2"
+                        HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"
+                        Height="50" Width="50" Margin="10" 
+                        FontSize="25" CornerRadius="25" >
+                        
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
 
@@ -50,9 +50,9 @@
             </Setter.Value>
         </Setter>
     </Style>
+<!--#endregion-->
 
-
-    <!-- DELETE/CANCEL BUTTON -->
+    <!-- #region DELETE/CANCEL BUTTON -->
     <Style TargetType="Button" x:Key="DangerBtn">
         <Setter Property="Template">
             <Setter.Value>
@@ -97,6 +97,62 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!--#endregion-->
+
+    <!--#region EDIT BUTTON -->
+    <Style TargetType="Button" x:Key="EditBtn">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter x:Name="contentPresenter"
+                           Foreground="{StaticResource clr1}" Background="{StaticResource clr6}" 
+                           BorderBrush="{StaticResource clr3}" BorderThickness="2"
+                           HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"
+                           Height="30" Width="60" Margin="20,5" Opacity="0.3"
+                           FontSize="18" CornerRadius="8" >
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="contentPresenter"/>
+                                    </Storyboard>
+                                </VisualState>
+
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr3}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr6}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource clr2}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="Width">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="70"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="Height">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="35"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="Opacity">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="contentPresenter"/>
+                                    </Storyboard>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                    </ContentPresenter>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
 
 
 </ResourceDictionary>

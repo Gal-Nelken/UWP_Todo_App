@@ -25,26 +25,51 @@ namespace UWP_Todo_App
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private TodoListViewModel listVM;
+        #region Properties
+            private TodoListViewModel listVM;
+        #endregion
 
-        public MainPage()
-        {
-            this.InitializeComponent();
-            listVM = new TodoListViewModel(Models.TodoRepository.Instance);
-        }
+        #region Constructor
+            public MainPage()
+            {
+                this.InitializeComponent();
+                listVM = new TodoListViewModel(Models.TodoRepository.Instance);
+            }
+        #endregion
 
+        #region Methods
+
+        // --- Add Todo Modal ---
         private void addTodoBtn_Click(object sender, RoutedEventArgs e)
-        {
+            {
+            
             var newTodoModal = new AddNewTodo()
             {
-                VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
             };
-            
             MainGrid.Children.Add(newTodoModal);
-            Grid.SetRow(newTodoModal, 1);
-            newTodoModal.ParentControl = MainGrid;
-        }
+            Grid.SetRowSpan(newTodoModal, 3);
+            newTodoModal.ParentControl = MainGrid;            
+            }
+
+        // --- Edit Todo Modal ---
+        private void EditBtn_Click(object sender, RoutedEventArgs e)
+            {
+                var button = sender as Button;
+                var ItemToEdit = (TodoItemViewModel)button.DataContext;
+
+                var editTodoModal = new EditTodoItem(ItemToEdit)
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                };
+                MainGrid.Children.Add(editTodoModal);
+                Grid.SetRowSpan(editTodoModal, 3);
+                editTodoModal.ParentControl = MainGrid;
+            }
+
+        #endregion
 
     }
 }

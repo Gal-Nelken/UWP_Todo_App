@@ -9,21 +9,22 @@
     xmlns:view="using:UWP_Todo_App.Views"
     xmlns:helpers="using:UWP_Todo_App.Helpers"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
- 
-    <Grid Background="{StaticResource clr3}" Margin="1" x:Name="MainGrid">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+
+    <Grid Background="{StaticResource clr3}" x:Name="MainGrid" Margin="3">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" x:Name="MiddleRow" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+        
       
             <TextBlock Text="Todo Items"
                        Style="{StaticResource MainTitle}"/>
 
         <!--#region TODOS CONTAINER-->
 
-        <ListView Grid.Row="1" Grid.RowSpan="2"
+        <ListView Grid.Row="1" Grid.RowSpan="2" 
                   Background="{StaticResource clr4}"
                   HorizontalAlignment="Stretch"
                   ItemsSource="{x:Bind listVM.Items, Mode=OneTime}"
@@ -31,11 +32,15 @@
             
             <!--#region ListViewItem For Styling-->
             <ListViewItem IsSelected="True" HorizontalContentAlignment="Stretch">
-                <Border Padding="5" Margin="20,0" Height="100"
-                            HorizontalAlignment="Stretch"
-                            BorderThickness="0,0,0,2"
-                            BorderBrush="Gray">
+                <Grid BorderBrush="Gray" BorderThickness="0,0,0,2" 
+                      MinHeight="100" Margin="20,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    
                     <StackPanel Orientation="Horizontal"
+                                Grid.Column="0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
                         <CheckBox  IsChecked="True"/>
@@ -45,43 +50,51 @@
                             <TextBlock Style="{StaticResource paragraph}"
                                     Text="asdlkfjas dlkfasmd lfkmasdlkfds msfdlmnfsld kgmnsfdlkgm asrdlm gasld;k mg;laskdmg ;laskm;las mgd;l"/>
                         </StackPanel>
-
                     </StackPanel>
-                </Border>
+                    <Button x:Name="EditBtn" Style="{StaticResource EditBtn}"
+                            Content="Edit" Grid.Column="1" />
+
+                </Grid>
             </ListViewItem>
             <!--#endregion-->
             
-            <ListView.ItemTemplate>
+            <ListView.ItemTemplate >
                 <DataTemplate x:DataType="vm:TodoItemViewModel">
-                    <Border Padding="5" 
-                            Margin="20,0" 
-                            HorizontalAlignment="Stretch"
-                            BorderThickness="0,0,0,2"
-                            BorderBrush="Gray">
-            
-                    <StackPanel Orientation="Horizontal"
+                    <Grid BorderBrush="Gray" BorderThickness="0,0,0,2" 
+                      MinHeight="100" Margin="20,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel Orientation="Horizontal"
+                                Grid.Column="0"
                                 HorizontalAlignment="Left"
-                                VerticalAlignment="Top">
-                        
-                        <CheckBox IsChecked="{x:Bind IsDone, Mode=TwoWay}"
+                                VerticalAlignment="Center">
+
+                            <CheckBox IsChecked="{x:Bind IsDone, Mode=TwoWay}"
                                   Click="{x:Bind Update}"/>
-                        
-                    
-                            
-                        <StackPanel Orientation="Vertical">
+
+
+
+                            <StackPanel Orientation="Vertical">
                                 <TextBlock Style="{StaticResource SubTitle}"
-                                    Foreground="{x:Bind helpers:XBindHelpers.BoolToColorTitle(IsDone), Mode=OneWay}">
-                                    <Run Text="{x:Bind Idx, Mode=OneWay}"/>. <Run Text="{x:Bind Title, Mode=OneTime}"/>
-                                </TextBlock> 
-                                       
+                                    Foreground="{x:Bind helpers:XBindHelpers.BoolToColor(IsDone,'title'), Mode=OneWay}">
+                                    <Run Text="{x:Bind Idx, Mode=OneWay}"/>. <Run Text="{x:Bind Title, Mode=OneWay}"/>
+                                </TextBlock>
+
                                 <TextBlock Style="{StaticResource paragraph}"
-                                    Foreground="{x:Bind helpers:XBindHelpers.BoolToColorDesc(IsDone), Mode=OneWay}"
-                                    Text="{x:Bind Description, Mode=OneTime}"/>
+                                    Foreground="{x:Bind helpers:XBindHelpers.BoolToColor(IsDone,'desc'), Mode=OneWay}"
+                                    Text="{x:Bind Description, Mode=OneWay}"/>
+                            </StackPanel>
                         </StackPanel>
-                     </StackPanel>
-                      
-                    
-                    </Border>
+
+                        <Button x:Name="EditBtn" Click="EditBtn_Click"
+                                Style="{StaticResource EditBtn}"
+                            Content="Edit" Grid.Column="1" />
+
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -92,9 +105,10 @@
             x:Name="BtnsContainer"
             Orientation="Horizontal"
             HorizontalAlignment="Right"
-            Grid.Row="2" 
-            Margin="0 0 25 15">
+            Grid.Row="2"
+            Margin="0 0 50 25">
             <Button x:Name="removeTodosBtn" 
+                    
                     Content="🗑" 
 					Style="{StaticResource DangerBtn}"
                     Click="{x:Bind listVM.DeleteItem}"
