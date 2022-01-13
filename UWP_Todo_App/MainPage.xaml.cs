@@ -43,30 +43,18 @@ namespace UWP_Todo_App
         private void addTodoBtn_Click(object sender, RoutedEventArgs e)
             {
             
-            var newTodoModal = new AddNewTodo()
-            {
-                VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-            };
+            var newTodoModal = new TodoItemModal(new TodoItemViewModel(Models.TodoRepository.Instance), MainGrid);
             MainGrid.Children.Add(newTodoModal);
             Grid.SetRowSpan(newTodoModal, 3);
-            newTodoModal.ParentControl = MainGrid;            
             }
 
         // --- Edit Todo Modal ---
         private void EditBtn_Click(object sender, RoutedEventArgs e)
             {
-                var button = sender as Button;
-                var ItemToEdit = (TodoItemViewModel)button.DataContext;
-
-                var editTodoModal = new EditTodoItem(ItemToEdit)
-                {
-                    VerticalAlignment = VerticalAlignment.Stretch,
-                    HorizontalAlignment = HorizontalAlignment.Stretch,
-                };
+                var ItemToEdit = (TodoItemViewModel)(sender as Button).DataContext;
+                var editTodoModal = new TodoItemModal(ItemToEdit, MainGrid);
                 MainGrid.Children.Add(editTodoModal);
                 Grid.SetRowSpan(editTodoModal, 3);
-                editTodoModal.ParentControl = MainGrid;
             }
 
         #endregion

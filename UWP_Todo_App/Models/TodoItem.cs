@@ -37,7 +37,7 @@ namespace UWP_Todo_App.Models
 
 
         #region Constructor
-        public TodoItem(string title, string description, bool isDone, int id = 0)
+        public TodoItem(string title, string description, bool isDone = false, int id = 0)
         {
             if (id == 0) ID = getRandomInt();
             else ID = id;
@@ -54,7 +54,7 @@ namespace UWP_Todo_App.Models
         private int getRandomInt()
         {
             Random rnd = new Random();
-            return rnd.Next(0, 99999);
+            return rnd.Next(1, 99999);
         }
 
         #endregion

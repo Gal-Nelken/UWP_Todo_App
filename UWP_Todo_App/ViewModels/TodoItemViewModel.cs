@@ -83,9 +83,9 @@ namespace UWP_Todo_App.ViewModels
         // --- Constructor for new TodoItem View-Model --- 
         public TodoItemViewModel(TodoRepository repository)
         {
+            ID = 0;
             Description = "";
             Title = "";
-            IsDone = false;
             _repository = repository;
         }
 
@@ -124,7 +124,7 @@ namespace UWP_Todo_App.ViewModels
         // --- Save New Item --- 
         public void Save()
         {
-            _repository.Add(new TodoItem(Title, Description, IsDone));
+            _repository.Add(new TodoItem(Title, Description));
         }
 
         #endregion

@@ -10,7 +10,7 @@ namespace UWP_Todo_App.Helpers
 {
     public static class XBindHelpers
     {
-
+        #region Boolean To Color Brush Helper
         public static SolidColorBrush BoolToColor(bool isDone, string param = "")
         {
             if (param == "title")
@@ -23,5 +23,8 @@ namespace UWP_Todo_App.Helpers
             }
             return new SolidColorBrush(Colors.White);
         }
+        #endregion
+
+       
     }
 }
